@@ -3,7 +3,9 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import MovieDetails from './pages/MovieDetails';
 import Cast from './pages/Cast';
+import Reviews from './pages/Reviews';
 import styled from '@emotion/styled';
+import { Container } from './App.styled';
 
 //================================
 //Trending
@@ -37,7 +39,7 @@ const ActiveNavLink = styled(NavLink)`
 
 export const App = () => {
   return (
-    <div>
+    <Container>
       <nav>
         <ul>
           <li>
@@ -54,10 +56,11 @@ export const App = () => {
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
 
         {/* <Route path="/movies/:movieId/reviews" element={<Reviews />}></Route> */}
       </Routes>
-    </div>
+    </Container>
   );
 };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { CreditsList } from './Cast.styled';
 
 const Cast = () => {
   const [state, setState] = useState([]);
@@ -45,7 +46,7 @@ const Cast = () => {
     <>
       {state && (
         <div>
-          <ul>
+          <CreditsList>
             {state.map(({ profile_path, name, id }) => {
               return (
                 <li key={id}>
@@ -54,7 +55,7 @@ const Cast = () => {
                 </li>
               );
             })}
-          </ul>
+          </CreditsList>
         </div>
       )}
     </>

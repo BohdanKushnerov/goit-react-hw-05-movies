@@ -39,8 +39,8 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <div>Tranding today</div>
+    <div>
+      <h2>Tranding today</h2>
       <ul>
         {state.map(({ id, original_title }) => {
           return (
@@ -52,7 +52,7 @@ const Home = () => {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

@@ -2,10 +2,11 @@ import axios from 'axios';
 import { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
+import { MovieWrap } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const reducer = (state, action) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
       case 'fetchMovie':
         return { ...state, ...action.payload };
@@ -27,17 +28,17 @@ const MovieDetails = () => {
         { signal: abortController.signal }
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       const { vote_average, overview, title, genres, poster_path } =
         response.data;
 
-      const normalizeData = {
+      const normalizedData = {
         vote_average,
         overview,
         title,
         genres: stringFromGanresArray(genres),
-        poster_path: `https://image.tmdb.org/t/p/w500${poster_path}`,
+        poster_path: `https://image.tmdb.org/t/p/w300_and_h450_bestv2${poster_path}`,
       };
 
       function stringFromGanresArray(array) {
@@ -51,7 +52,7 @@ const MovieDetails = () => {
       dispatch({
         type: 'fetchMovie',
         payload: {
-          ...normalizeData,
+          ...normalizedData,
         },
       });
     }
@@ -65,25 +66,30 @@ const MovieDetails = () => {
 
   const { vote_average, overview, title, genres, poster_path } = state;
 
-  // w600_and_h900_bestv2
-
   return (
     <>
       {state && (
         <div>
-          <h2>{title}</h2>
-          <img src={poster_path} alt={title} />
-          <p>User score: {Math.round(vote_average * 10)}%</p>
-          <h3>Overview</h3>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <p>{genres}</p>
+          <MovieWrap>
+            <img src={poster_path} alt={title} />
+
+            <div>
+              <h2>{title}</h2>
+              <p>User score: {Math.round(vote_average * 10)}%</p>
+              <h3>Overview</h3>
+              <p>{overview}</p>
+              <h3>Genres</h3>
+              <p>{genres}</p>
+            </div>
+          </MovieWrap>
 
           <ul>
             <li>
               <Link to="cast">CAST</Link>
             </li>
-
+            <li>
+              <Link to="reviews">REVIEWS</Link>
+            </li>
             <Outlet />
           </ul>
         </div>
@@ -91,6 +97,5 @@ const MovieDetails = () => {
     </>
   );
 };
-// назва, %, овервю, опис, генрес, драмма.
 
 export default MovieDetails;
