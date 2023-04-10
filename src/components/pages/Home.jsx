@@ -26,9 +26,18 @@ const Home = () => {
         { signal: abortController.signal }
       );
 
-      console.log(response.data.results);
+      const normalizeData = response.data.results.map(
+        ({ id, original_title }) => {
+          return {
+            id,
+            original_title,
+          };
+        }
+      );
 
-      setState([...response.data.results]);
+      // console.log('normalizeData', normalizeData);
+
+      setState([...normalizeData]);
       // dispatch({ type: 'fetchTrending', payload: response.data.results });
     }
 

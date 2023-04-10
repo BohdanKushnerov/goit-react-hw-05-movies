@@ -28,8 +28,6 @@ const MovieDetails = () => {
         { signal: abortController.signal }
       );
 
-      // console.log(response.data);
-
       const { vote_average, overview, title, genres, poster_path } =
         response.data;
 
