@@ -3,21 +3,39 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  // const reducer = (state, action) => {
+  //   console.log(action);
+  //   switch (action.type) {
+  //     case 'fetchTrending':
+  //       return [...state, ...action.payload];
+  //     default:
+  //       break;
+  //   }
+  // };
+
   const [state, setState] = useState([]);
+  // const [state, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
-    // Request
+    const abortController = new AbortController();
+
+    // Request function
     async function fetchTrending() {
       const response = await axios.get(
-        'https://api.themoviedb.org/3/trending/movie/day?api_key=a89ed47e53c22ac07455246c7a19999d'
+        'https://api.themoviedb.org/3/trending/movie/day?api_key=a89ed47e53c22ac07455246c7a19999d',
+        { signal: abortController.signal }
       );
 
-      setState([...response.data.results]);
+      console.log(response.data.results);
 
-      // return response.data.results;
+      setState([...response.data.results]);
+      // dispatch({ type: 'fetchTrending', payload: response.data.results });
     }
 
     fetchTrending();
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (
@@ -25,7 +43,6 @@ const Home = () => {
       <div>Tranding today</div>
       <ul>
         {state.map(({ id, original_title }) => {
-          // console.log(movie);
           return (
             <li key={id}>
               <Link key={id} to={`movies/${id}`}>
