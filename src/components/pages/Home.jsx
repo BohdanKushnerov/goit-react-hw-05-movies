@@ -1,20 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TrandingList, Item, Title } from './Home.styled';
+import Progressbar from './Home.styled';
+
+// import { buildStyles } from 'react-circular-progressbar';
+
+// import 'react-circular-progressbar/dist/styles.css';
 
 const Home = () => {
-  // const reducer = (state, action) => {
-  //   console.log(action);
-  //   switch (action.type) {
-  //     case 'fetchTrending':
-  //       return [...state, ...action.payload];
-  //     default:
-  //       break;
-  //   }
-  // };
-
   const [state, setState] = useState([]);
-  // const [state, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -26,19 +21,21 @@ const Home = () => {
         { signal: abortController.signal }
       );
 
+      console.log(response.data.results);
+
       const normalizeData = response.data.results.map(
-        ({ id, original_title }) => {
+        ({ id, original_title, vote_average, poster_path, title }) => {
           return {
             id,
             original_title,
+            vote_average,
+            poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
+            title,
           };
         }
       );
 
-      // console.log('normalizeData', normalizeData);
-
       setState([...normalizeData]);
-      // dispatch({ type: 'fetchTrending', payload: response.data.results });
     }
 
     fetchTrending();
@@ -50,17 +47,25 @@ const Home = () => {
   return (
     <div>
       <h2>Tranding today</h2>
-      <ul>
-        {state.map(({ id, original_title }) => {
-          return (
-            <li key={id}>
-              <Link key={id} to={`movies/${id}`}>
-                {original_title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <TrandingList>
+        {state.map(
+          ({ id, original_title, vote_average, poster_path, title }) => {
+            return (
+              <Item key={id}>
+                <Link key={id} to={`movies/${id}`}>
+                  <img src={poster_path} alt={title} />
+                  <Title>{original_title}</Title>
+                </Link>
+
+                <Progressbar
+                  value={Math.round(vote_average * 10)}
+                  text={`${Math.round(vote_average * 10)}%`}
+                />
+              </Item>
+            );
+          }
+        )}
+      </TrandingList>
     </div>
   );
 };
