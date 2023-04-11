@@ -1,13 +1,9 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { TrandingList, Item, Title } from './Home.styled';
-import Progressbar from './Home.styled';
+import axios from 'axios';
+import FilmList from 'components/FilmList/FilmList';
 
 const Home = () => {
   const [state, setState] = useState([]);
-
-  const location = useLocation();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -45,25 +41,7 @@ const Home = () => {
   return (
     <div>
       <h2>Tranding today</h2>
-      <TrandingList>
-        {state.map(
-          ({ id, original_title, vote_average, poster_path, title }) => {
-            return (
-              <Item key={id}>
-                <Link key={id} to={`movies/${id}`} state={{ from: location }}>
-                  <img src={poster_path} alt={title} />
-                  <Title>{original_title}</Title>
-                </Link>
-
-                <Progressbar
-                  value={Math.round(vote_average * 10)}
-                  text={`${Math.round(vote_average * 10)}%`}
-                />
-              </Item>
-            );
-          }
-        )}
-      </TrandingList>
+      <FilmList state={state}></FilmList>
     </div>
   );
 };

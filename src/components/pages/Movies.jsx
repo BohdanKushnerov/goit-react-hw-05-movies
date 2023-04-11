@@ -1,35 +1,20 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import FilmList from 'components/FilmList/FilmList';
+
+import SearchForm from 'components/SearchForm/SearchForm';
 
 const Movies = () => {
-  const [state, setState] = useState('');
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
-
   const [searchParams, setSearchParams] = useSearchParams();
+
   const filmName = searchParams.get('search');
 
-  const location = useLocation();
-
-  console.log('filmName', filmName);
-
-  const handleChange = e => {
-    const { value } = e.currentTarget;
-
-    setState(value.toLowerCase());
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    setSearchParams({ search: state });
-    setSearch(state);
-    reset();
-  };
-
-  const reset = () => {
-    setState('');
+  const handleSubmit = value => {
+    setSearchParams({ search: value });
+    setSearch(value);
   };
 
   useEffect(() => {
@@ -48,10 +33,13 @@ const Movies = () => {
       );
 
       const normalizeData = response.data.results.map(
-        ({ id, original_title }) => {
+        ({ id, original_title, vote_average, poster_path, title }) => {
           return {
             id,
             original_title,
+            vote_average,
+            poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
+            title,
           };
         }
       );
@@ -68,22 +56,8 @@ const Movies = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="text" value={state} onChange={handleChange} />
-        <button type="submit">Search</button>
-      </form>
-
-      <ul>
-        {data.map(({ id, original_title }) => {
-          return (
-            <li key={id}>
-              <Link key={id} to={`${id}`} state={{ from: location }}>
-                {original_title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <SearchForm onSubmit={handleSubmit}></SearchForm>
+      <FilmList state={data}></FilmList>
     </div>
   );
 };

@@ -24,5 +24,7 @@ export const App = () => {
 // 1. Loading on pages
 // 2. PropTypes for CANVAS + make new component
 // 3. add default values for useSearchParams - update when delete values
+// 4. add any reviews []
+// 5. add any films []
 
-// 3. Try find new canvas
+// *. Try find new canvas
