@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
 import { MovieWrap } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const reducer = (state, action) => {
-    // console.log(action);
     switch (action.type) {
       case 'fetchMovie':
         return { ...state, ...action.payload };
@@ -17,6 +16,12 @@ const MovieDetails = () => {
 
   const [state, dispatch] = useReducer(reducer, {});
   const { movieId } = useParams();
+
+  const location = useLocation();
+  // const backLinkHref = location.state?.from ?? `/movies/${movieId}`; // разобраться с значение по умолчанию
+  const backLinkHref = location.state?.from ?? `/`; // разобраться с значение по умолчанию
+
+  console.log(location.state);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -68,6 +73,7 @@ const MovieDetails = () => {
     <>
       {state && (
         <div>
+          <Link to={backLinkHref}>Back to products</Link>
           <MovieWrap>
             <img src={poster_path} alt={title} />
 

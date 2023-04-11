@@ -28,6 +28,9 @@ const Canvas = styled(CircularProgressbar)`
 `;
 
 const Progressbar = ({ value, text }) => {
+  const pathColor = value >= 75 ? '#21d07a' : '#d2d531';
+  const trailColor = value >= 75 ? '#204529' : '#423d0f';
+
   return (
     <Canvas
       value={value}
@@ -36,8 +39,8 @@ const Progressbar = ({ value, text }) => {
       backgroundPadding={6}
       styles={buildStyles({
         textColor: 'white',
-        pathColor: '#d2d531',
-        trailColor: '#423d0f',
+        pathColor: pathColor,
+        trailColor: trailColor,
         backgroundColor: '#081c22',
         textSize: '35px',
       })}

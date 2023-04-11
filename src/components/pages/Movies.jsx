@@ -1,21 +1,29 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 
 const Movies = () => {
   const [state, setState] = useState('');
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filmName = searchParams.get('search');
+
+  const location = useLocation();
+
+  console.log('filmName', filmName);
+
   const handleChange = e => {
     const { value } = e.currentTarget;
 
-    setState(value);
+    setState(value.toLowerCase());
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
+    setSearchParams({ search: state });
     setSearch(state);
     reset();
   };
@@ -25,7 +33,7 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    if (!search) {
+    if (!search && !filmName) {
       return;
     }
 
@@ -33,7 +41,9 @@ const Movies = () => {
 
     async function fetchSearchMovie() {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=a89ed47e53c22ac07455246c7a19999d&query=${search}`,
+        `https://api.themoviedb.org/3/search/movie?api_key=a89ed47e53c22ac07455246c7a19999d&query=${
+          search || filmName
+        }`,
         { signal: abortController.signal }
       );
 
@@ -54,7 +64,7 @@ const Movies = () => {
     return () => {
       abortController.abort();
     };
-  }, [search]);
+  }, [search, filmName]);
 
   return (
     <div>
@@ -67,7 +77,12 @@ const Movies = () => {
         {data.map(({ id, original_title }) => {
           return (
             <li key={id}>
-              <Link key={id} to={`${id}`}>
+              <Link
+                key={id}
+                to={`${id}`}
+                // state={{ from: `movies?search=${search}` }}
+                state={{ from: location }}
+              >
                 {original_title}
               </Link>
             </li>

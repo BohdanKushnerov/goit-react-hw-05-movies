@@ -6,6 +6,27 @@ import Cast from './pages/Cast';
 import Reviews from './pages/Reviews';
 import SharedLayout from './SharedLayout';
 
+export const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MovieDetails />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Route>
+      </Route>
+    </Routes>
+  );
+};
+
+// 1. Loading on pages
+// 2. PropTypes for CANVAS + make new component
+
+// 3. Try find new canvas
+// 4. Try make
+
 //================================
 //Trending
 // https://api.themoviedb.org/3/trending/movie/day?api_key=a89ed47e53c22ac07455246c7a19999d
@@ -27,18 +48,3 @@ import SharedLayout from './SharedLayout';
 
 // 594767-id & page=1
 //================================
-
-export const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Home />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
-        </Route>
-      </Route>
-    </Routes>
-  );
-};
