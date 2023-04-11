@@ -8,6 +8,7 @@ import SearchForm from 'components/SearchForm/SearchForm';
 const Movies = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filmName = searchParams.get('search');
@@ -25,26 +26,34 @@ const Movies = () => {
     const abortController = new AbortController();
 
     async function fetchSearchMovie() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=a89ed47e53c22ac07455246c7a19999d&query=${
-          search || filmName
-        }`,
-        { signal: abortController.signal }
-      );
+      setLoading(true);
 
-      const normalizeData = response.data.results.map(
-        ({ id, original_title, vote_average, poster_path, title }) => {
-          return {
-            id,
-            original_title,
-            vote_average,
-            poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
-            title,
-          };
-        }
-      );
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/movie?api_key=a89ed47e53c22ac07455246c7a19999d&query=${
+            search || filmName
+          }`,
+          { signal: abortController.signal }
+        );
 
-      setData([...normalizeData]);
+        const normalizeData = response.data.results.map(
+          ({ id, original_title, vote_average, poster_path, title }) => {
+            return {
+              id,
+              original_title,
+              vote_average,
+              poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
+              title,
+            };
+          }
+        );
+
+        setData([...normalizeData]);
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     fetchSearchMovie();
@@ -57,7 +66,7 @@ const Movies = () => {
   return (
     <div>
       <SearchForm onSubmit={handleSubmit}></SearchForm>
-      <FilmList state={data}></FilmList>
+      <FilmList state={data} loading={loading}></FilmList>
     </div>
   );
 };

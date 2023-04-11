@@ -27,5 +27,11 @@ export const App = () => {
 // 4. add any reviews []
 // 5. add any films []
 // 6. PropTypes for components
+// 7. try - catch
 
-// *. Try find new canvas
+// 1. Try find new canvas
+// 2. Sceleton
+// https://skeletonreact.com/
+// https://github.com/danilowoz/react-content-loader#gettingstarted
+
+// 3. finnaly
