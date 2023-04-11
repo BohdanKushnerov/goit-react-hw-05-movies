@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useRef, useEffect, useReducer } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Link, Outlet } from 'react-router-dom';
-import { MovieWrap } from './MovieDetails.styled';
+// import { MovieWrap } from './MovieDetails.styled';
+import Movie from 'components/Movie/Movie';
 
 const MovieDetails = () => {
   const reducer = (state, action) => {
@@ -68,25 +69,12 @@ const MovieDetails = () => {
     };
   }, [movieId]);
 
-  const { vote_average, overview, title, genres, poster_path } = state;
-
   return (
     <>
       {state && (
         <div>
           <Link to={current}>Back to products</Link>
-          <MovieWrap>
-            <img src={poster_path} alt={title} />
-
-            <div>
-              <h2>{title}</h2>
-              <p>User score: {Math.round(vote_average * 10)}%</p>
-              <h3>Overview</h3>
-              <p>{overview}</p>
-              <h3>Genres</h3>
-              <p>{genres}</p>
-            </div>
-          </MovieWrap>
+          <Movie state={state}></Movie>
 
           <ul>
             <li>

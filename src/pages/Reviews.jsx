@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ReviewList from 'components/ReviewList/ReviewList';
 
 const Reviews = () => {
   const [state, setState] = useState([]);
@@ -40,17 +41,7 @@ const Reviews = () => {
 
   return (
     <div>
-      <ul>
-        {state.map(({ author, content, id, url }) => {
-          return (
-            <li key={id}>
-              <h2>Author: {author}</h2>
-              <p>{content}</p>
-              <a href={url}>Link</a>
-            </li>
-          );
-        })}
-      </ul>
+      <ReviewList state={state}></ReviewList>
     </div>
   );
 };

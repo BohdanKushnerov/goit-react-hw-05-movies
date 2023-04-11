@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { CreditsList } from './Cast.styled';
+import CastList from 'components/CastList/CastList';
 
 const Cast = () => {
   const [state, setState] = useState([]);
@@ -46,16 +46,7 @@ const Cast = () => {
     <>
       {state && (
         <div>
-          <CreditsList>
-            {state.map(({ profile_path, name, id }) => {
-              return (
-                <li key={id}>
-                  <img src={profile_path} alt={name} />
-                  <p>{name}</p>
-                </li>
-              );
-            })}
-          </CreditsList>
+          <CastList state={state}></CastList>
         </div>
       )}
     </>
