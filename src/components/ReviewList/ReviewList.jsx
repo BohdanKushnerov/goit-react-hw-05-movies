@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ReviewList = ({ state }) => {
   return (
     <ul>
@@ -12,6 +14,17 @@ const ReviewList = ({ state }) => {
       })}
     </ul>
   );
+};
+
+ReviewList.propTypes = {
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default ReviewList;

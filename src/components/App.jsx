@@ -28,6 +28,11 @@ export const App = () => {
 // 5. add any films []
 // 6. PropTypes for components
 // 7. try - catch
+// 8. loader when make "lazy components"
+// 9. page 404
+// 10. 0% icon red color
+// 11. img 220x330 placeholder on fetchSearchMovie
+// 12. reducer
 
 // 1. Try find new canvas
 // 2. Sceleton

@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { fetchSearchMovie } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
-
 import SearchForm from 'components/SearchForm/SearchForm';
 
 const Movies = () => {
@@ -25,38 +24,22 @@ const Movies = () => {
 
     const abortController = new AbortController();
 
-    async function fetchSearchMovie() {
+    // IIFE
+    (async function fetch() {
       setLoading(true);
 
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?api_key=a89ed47e53c22ac07455246c7a19999d&query=${
-            search || filmName
-          }`,
-          { signal: abortController.signal }
+        const searchFilms = await fetchSearchMovie(
+          search || filmName,
+          abortController
         );
 
-        const normalizeData = response.data.results.map(
-          ({ id, original_title, vote_average, poster_path, title }) => {
-            return {
-              id,
-              original_title,
-              vote_average,
-              poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
-              title,
-            };
-          }
-        );
-
-        setData([...normalizeData]);
-
+        setData([...searchFilms]);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
-    }
-
-    fetchSearchMovie();
+    })();
 
     return () => {
       abortController.abort();
@@ -64,10 +47,14 @@ const Movies = () => {
   }, [search, filmName]);
 
   return (
-    <div>
-      <SearchForm onSubmit={handleSubmit}></SearchForm>
-      <FilmList state={data} loading={loading}></FilmList>
-    </div>
+    <>
+      <section>
+        <SearchForm onSubmit={handleSubmit}></SearchForm>
+      </section>
+      <section>
+        <FilmList state={data} loading={loading}></FilmList>
+      </section>
+    </>
   );
 };
 

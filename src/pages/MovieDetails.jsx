@@ -1,8 +1,6 @@
-import axios from 'axios';
 import { useRef, useEffect, useReducer } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { Link, Outlet } from 'react-router-dom';
-// import { MovieWrap } from './MovieDetails.styled';
+import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { fetchMovie } from 'services/Fetch';
 import Movie from 'components/Movie/Movie';
 
 const MovieDetails = () => {
@@ -22,72 +20,45 @@ const MovieDetails = () => {
 
   const { current } = useRef(location.state?.from ?? `/`);
 
-  console.log(current);
-
   useEffect(() => {
     const abortController = new AbortController();
 
-    // Request function
-    async function fetchMovie() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=a89ed47e53c22ac07455246c7a19999d&language=en-US`,
-        { signal: abortController.signal }
-      );
+    // IIFE
+    (async function fetch() {
+      try {
+        const movie = await fetchMovie(movieId, abortController);
 
-      const { vote_average, overview, title, genres, poster_path } =
-        response.data;
-
-      const normalizedData = {
-        vote_average,
-        overview,
-        title,
-        genres: stringFromGanresArray(genres),
-        poster_path: `https://image.tmdb.org/t/p/w300_and_h450_bestv2${poster_path}`,
-      };
-
-      function stringFromGanresArray(array) {
-        const string = array.reduce((acc, value) => {
-          return (acc += value.name);
-        }, '');
-
-        return string.split(/(?=[A-Z])/).join(', ');
+        dispatch({
+          type: 'fetchMovie',
+          payload: {
+            ...movie,
+          },
+        });
+      } catch (error) {
+        console.log(error);
       }
-
-      dispatch({
-        type: 'fetchMovie',
-        payload: {
-          ...normalizedData,
-        },
-      });
-    }
-
-    fetchMovie();
+    })();
 
     return () => {
       abortController.abort();
-      console.log('Exit');
     };
   }, [movieId]);
 
   return (
-    <>
-      {state && (
-        <div>
-          <Link to={current}>Back to products</Link>
-          <Movie state={state}></Movie>
+    <div>
+      <Link to={current}>Back to products</Link>
+      <Movie state={state}></Movie>
 
-          <ul>
-            <li>
-              <Link to="cast">CAST</Link>
-            </li>
-            <li>
-              <Link to="reviews">REVIEWS</Link>
-            </li>
-            <Outlet />
-          </ul>
-        </div>
-      )}
-    </>
+      <ul>
+        <li>
+          <Link to="cast">CAST</Link>
+        </li>
+        <li>
+          <Link to="reviews">REVIEWS</Link>
+        </li>
+        <Outlet />
+      </ul>
+    </div>
   );
 };
 

@@ -21,9 +21,11 @@ const SharedLayout = () => {
           </NavList>
         </nav>
       </Header>
-      <Container>
-        <Outlet />
-      </Container>
+      <main>
+        <Container>
+          <Outlet />
+        </Container>
+      </main>
     </>
   );
 };

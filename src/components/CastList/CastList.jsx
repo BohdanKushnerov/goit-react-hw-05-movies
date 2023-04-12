@@ -1,4 +1,5 @@
 import { CreditsList } from './CastList.styled';
+import PropTypes from 'prop-types';
 
 const CastList = ({ state }) => {
   return (
@@ -13,6 +14,16 @@ const CastList = ({ state }) => {
       })}
     </CreditsList>
   );
+};
+
+CastList.propTypes = {
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      profile_path: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default CastList;

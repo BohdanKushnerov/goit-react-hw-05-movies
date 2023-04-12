@@ -1,8 +1,9 @@
 import { MovieWrap } from './Movie.styled';
+import PropTypes from 'prop-types';
 
 const Movie = ({ state }) => {
   const { vote_average, overview, title, genres, poster_path } = state;
-
+  console.log(state);
   return (
     <MovieWrap>
       <img src={poster_path} alt={title} />
@@ -17,6 +18,16 @@ const Movie = ({ state }) => {
       </div>
     </MovieWrap>
   );
+};
+
+Movie.propTypes = {
+  state: PropTypes.shape({
+    genres: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    poster_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Movie;

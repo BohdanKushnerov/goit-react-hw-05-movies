@@ -1,13 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
+import Loader from 'components/Loader/Loader';
 import { TrandingList, Item, Title } from './FilmList.styled';
 import Progressbar from './FilmList.styled';
-import Loader from 'components/Loader/Loader';
+import PropTypes from 'prop-types';
 
 const FilmList = ({ state, loading }) => {
-  console.log(loading);
   const location = useLocation();
-
-  console.log(location.pathname);
 
   function takePathto(filmId) {
     return location.pathname === '/' ? `movies/${filmId}` : `${filmId}`;
@@ -36,6 +34,19 @@ const FilmList = ({ state, loading }) => {
       </TrandingList>
     </>
   );
+};
+
+FilmList.propTypes = {
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_title: PropTypes.string.isRequired,
+      poster_path: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FilmList;

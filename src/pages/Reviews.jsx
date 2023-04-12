@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchReviews } from 'services/Fetch';
 import ReviewList from 'components/ReviewList/ReviewList';
 
 const Reviews = () => {
@@ -9,40 +9,27 @@ const Reviews = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    async function fetchReviews() {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=a89ed47e53c22ac07455246c7a19999d&language=en-US&page=1`,
-        { signal: abortController.signal }
-      );
 
-      console.log(response.data.results);
+    // IIFE
+    (async function fetch() {
+      try {
+        const moviesReviews = await fetchReviews(movieId, abortController);
 
-      const normalizedReview = response.data.results.map(
-        ({ author, content, id, url }) => {
-          return {
-            author,
-            content,
-            id,
-            url,
-          };
-        }
-      );
+        setState([...moviesReviews]);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
 
-      console.log(normalizedReview);
-
-      setState([...normalizedReview]);
-    }
-
-    fetchReviews();
     return () => {
       abortController.abort();
     };
   }, [movieId]);
 
   return (
-    <div>
+    <section>
       <ReviewList state={state}></ReviewList>
-    </div>
+    </section>
   );
 };
 
