@@ -12,7 +12,9 @@ async function fetchTrending(abortController) {
         id,
         original_title,
         vote_average,
-        poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
+        poster_path: poster_path
+          ? `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`
+          : 'https://via.placeholder.com/220x330',
         title,
       };
     }
@@ -31,11 +33,15 @@ async function fetchSearchMovie(filmName, abortController) {
         id,
         original_title,
         vote_average,
-        poster_path: `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`,
+        poster_path: poster_path
+          ? `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}`
+          : 'https://via.placeholder.com/220x330',
         title,
       };
     }
   );
+
+  // poster_path: poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}` : 'https://via.placeholder.com/220x330',
 }
 
 async function fetchMovieCredits(movieId, abortController) {
@@ -45,19 +51,13 @@ async function fetchMovieCredits(movieId, abortController) {
   );
 
   return response.data.cast.map(({ profile_path, name, id }) => {
-    if (profile_path) {
-      return {
-        profile_path: `https://image.tmdb.org/t/p/w138_and_h175_face${profile_path}`,
-        name,
-        id,
-      };
-    } else {
-      return {
-        profile_path: 'https://via.placeholder.com/138x175',
-        name,
-        id,
-      };
-    }
+    return {
+      profile_path: profile_path
+        ? `https://image.tmdb.org/t/p/w138_and_h175_face${profile_path}`
+        : 'https://via.placeholder.com/138x175',
+      name,
+      id,
+    };
   });
 }
 
@@ -90,7 +90,9 @@ async function fetchMovie(movieId, abortController) {
     overview,
     title,
     genres: stringFromGanresArray(genres),
-    poster_path: `https://image.tmdb.org/t/p/w300_and_h450_bestv2${poster_path}`,
+    poster_path: poster_path
+      ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${poster_path}`
+      : 'https://via.placeholder.com/300x450',
   };
 
   function stringFromGanresArray(array) {

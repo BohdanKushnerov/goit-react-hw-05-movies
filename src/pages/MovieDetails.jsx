@@ -47,6 +47,9 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to={current}>Back to products</Link>
+
+      {/* {Object.keys(state).length !== 0 ? <Movie state={state}></Movie> : null} */}
+      {/* =================== */}
       <Movie state={state}></Movie>
 
       <ul>

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 const ReviewList = ({ state }) => {
+  console.log(state);
+
   return (
     <ul>
       {state.map(({ author, content, id, url }) => {
