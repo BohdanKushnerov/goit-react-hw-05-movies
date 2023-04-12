@@ -5,6 +5,8 @@ import Progressbar from './FilmList.styled';
 import PropTypes from 'prop-types';
 
 const FilmList = ({ state, loading }) => {
+  console.log(state);
+
   const location = useLocation();
 
   function takePathto(filmId) {

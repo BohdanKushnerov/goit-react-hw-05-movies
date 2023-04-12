@@ -22,17 +22,14 @@ export const App = () => {
 };
 
 // 1. Loading on pages
-// 2. PropTypes for CANVAS + make new component
+// 2. CANVAS + make new component
 // 3. add default values for useSearchParams - update when delete values
 // 4. add any reviews []
 // 5. add any films []
-// 6. PropTypes for components
-// 7. try - catch
 // 8. loader when make "lazy components"
 // 9. page 404
 // 10. 0% icon red color
-// 11. img 220x330 placeholder on fetchSearchMovie
-// 12. reducer
+// 12. reducer {}
 
 // 1. Try find new canvas
 // 2. Sceleton

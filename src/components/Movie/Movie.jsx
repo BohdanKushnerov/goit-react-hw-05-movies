@@ -2,8 +2,9 @@ import { MovieWrap } from './Movie.styled';
 import PropTypes from 'prop-types';
 
 const Movie = ({ state }) => {
-  const { vote_average, overview, title, genres, poster_path } = state;
   console.log(state);
+  const { vote_average, overview, title, genres, poster_path } = state;
+
   return (
     <MovieWrap>
       <img src={poster_path} alt={title} />
