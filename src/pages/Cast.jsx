@@ -28,7 +28,11 @@ const Cast = () => {
 
   return (
     <section>
-      <CastList state={state}></CastList>
+      {state.length ? (
+        <CastList state={state}></CastList>
+      ) : (
+        <h2>We don't have any cast added to this movie</h2>
+      )}
     </section>
   );
 };

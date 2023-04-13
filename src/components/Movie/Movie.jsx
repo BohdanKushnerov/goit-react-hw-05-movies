@@ -2,6 +2,10 @@ import { MovieWrap } from './Movie.styled';
 import PropTypes from 'prop-types';
 
 const Movie = ({ state }) => {
+  // if (!state) {
+  //   return <div>Loading...</div>;
+  // }
+
   console.log(state);
   const { vote_average, overview, title, genres, poster_path } = state;
 

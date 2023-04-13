@@ -21,15 +21,10 @@ export const App = () => {
   );
 };
 
-// 1. Loading on pages
-// 2. CANVAS + make new component
-// 3. add default values for useSearchParams - update when delete values
-// 4. add any reviews []
-// 5. add any films []
-// 8. loader when make "lazy components"
-// 9. page 404
-// 10. 0% icon red color
-// 12. reducer {}
+// 1. Loading on pages -- SUSPENCE // 8. loader when make "lazy components"
+// 2. add default values for useSearchParams - update when delete values
+// 3. page 404
+// 4. reducer {} => useState
 
 // 1. Try find new canvas
 // 2. Sceleton

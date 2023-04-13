@@ -28,7 +28,11 @@ const Reviews = () => {
 
   return (
     <section>
-      <ReviewList state={state}></ReviewList>
+      {state.length ? (
+        <ReviewList state={state}></ReviewList>
+      ) : (
+        <h2>We don't have any reviews for this film</h2>
+      )}
     </section>
   );
 };

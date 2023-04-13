@@ -46,13 +46,20 @@ const Movies = () => {
     };
   }, [search, filmName]);
 
+  console.log('data', data);
+
   return (
     <>
       <section>
         <SearchForm onSubmit={handleSubmit}></SearchForm>
       </section>
       <section>
-        <FilmList state={data} loading={loading}></FilmList>
+        {/* <FilmList state={data} loading={loading}></FilmList> */}
+        {data.length ? (
+          <FilmList state={data} loading={loading}></FilmList>
+        ) : (
+          <h2>There are no movies that matched your query.</h2>
+        )}
       </section>
     </>
   );

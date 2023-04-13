@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 import { TrandingList, Item, Title } from './FilmList.styled';
-import Progressbar from './FilmList.styled';
+import Progressbar from 'components/Progressbar/Progressbar';
 import PropTypes from 'prop-types';
 
 const FilmList = ({ state, loading }) => {
