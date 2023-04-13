@@ -3,8 +3,16 @@ import { useParams } from 'react-router-dom';
 import { fetchReviews } from 'services/Fetch';
 import ReviewList from 'components/ReviewList/ReviewList';
 
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
 const Reviews = () => {
   const [state, setState] = useState([]);
+  const [status, setStatus] = useState(Status.IDLE);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -12,12 +20,15 @@ const Reviews = () => {
 
     // IIFE
     (async function fetch() {
+      setStatus(Status.PENDING);
       try {
         const moviesReviews = await fetchReviews(movieId, abortController);
 
         setState([...moviesReviews]);
+        setStatus(Status.RESOLVED);
       } catch (error) {
         console.log(error);
+        setStatus(Status.REJECTED);
       }
     })();
 
@@ -28,9 +39,8 @@ const Reviews = () => {
 
   return (
     <section>
-      {state.length ? (
-        <ReviewList state={state}></ReviewList>
-      ) : (
+      {status === Status.RESOLVED && <ReviewList state={state}></ReviewList>}
+      {!state.length && status === Status.RESOLVED && (
         <h2>We don't have any reviews for this film</h2>
       )}
     </section>

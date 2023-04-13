@@ -4,10 +4,18 @@ import { fetchSearchMovie } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
 
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
 const Movies = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(Status.IDLE);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filmName = searchParams.get('search');
@@ -27,6 +35,7 @@ const Movies = () => {
     // IIFE
     (async function fetch() {
       setLoading(true);
+      setStatus(Status.PENDING);
 
       try {
         const searchFilms = await fetchSearchMovie(
@@ -36,8 +45,10 @@ const Movies = () => {
 
         setData([...searchFilms]);
         setLoading(false);
+        setStatus(Status.RESOLVED);
       } catch (error) {
         console.log(error);
+        setStatus(Status.REJECTED);
       }
     })();
 
@@ -54,10 +65,10 @@ const Movies = () => {
         <SearchForm onSubmit={handleSubmit}></SearchForm>
       </section>
       <section>
-        {/* <FilmList state={data} loading={loading}></FilmList> */}
-        {data.length ? (
+        {status === Status.RESOLVED && (
           <FilmList state={data} loading={loading}></FilmList>
-        ) : (
+        )}
+        {!data.length && status === Status.RESOLVED && (
           <h2>There are no movies that matched your query.</h2>
         )}
       </section>

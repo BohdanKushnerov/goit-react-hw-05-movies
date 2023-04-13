@@ -40,8 +40,6 @@ async function fetchSearchMovie(filmName, abortController) {
       };
     }
   );
-
-  // poster_path: poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${poster_path}` : 'https://via.placeholder.com/220x330',
 }
 
 async function fetchMovieCredits(movieId, abortController) {

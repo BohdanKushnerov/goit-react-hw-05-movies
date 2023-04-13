@@ -23,7 +23,7 @@ ReviewList.propTypes = {
     PropTypes.shape({
       author: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
