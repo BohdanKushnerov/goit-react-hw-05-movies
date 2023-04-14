@@ -1,10 +1,11 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
-import Movies from '../pages/Movies';
-import MovieDetails from '../pages/MovieDetails';
-import Cast from '../pages/Cast';
-import Reviews from '../pages/Reviews';
 import SharedLayout from './SharedLayout';
+const Home = lazy(() => import('../pages/Home'));
+const Movies = lazy(() => import('../pages/Movies'));
+const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+const Cast = lazy(() => import('../pages/Cast'));
+const Reviews = lazy(() => import('../pages/Reviews'));
 
 export const App = () => {
   return (
@@ -21,10 +22,9 @@ export const App = () => {
   );
 };
 
-// 1. Loading on pages -- SUSPENCE // 8. loader when make "lazy components"
+// 1. Status to another component
 // 2. add default values for useSearchParams - update when delete values
 // 3. page 404
-// 4. reducer {} => useState
 
 // 1. Try find new canvas
 // 2. Sceleton

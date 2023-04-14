@@ -4,5 +4,4 @@ export const CreditsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  /* gap: 32px; */
 `;
