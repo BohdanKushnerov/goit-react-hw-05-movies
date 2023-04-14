@@ -10,8 +10,6 @@ import {
 } from './FilmList.styled';
 
 const FilmList = ({ state }) => {
-  console.log(state);
-
   const location = useLocation();
 
   function takePathto(filmId) {

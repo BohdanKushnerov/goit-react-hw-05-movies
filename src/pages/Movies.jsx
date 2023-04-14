@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchSearchMovie } from 'services/Fetch';
+import { fetchSearchMovie } from 'services/FetchFunctions';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
 import Loader from 'components/Loader/Loader';
@@ -54,16 +54,25 @@ const Movies = () => {
 
   return (
     <>
-      <section>
-        <SearchForm onSubmit={handleSubmit}></SearchForm>
-      </section>
-      <section>
-        {loading && <Loader />}
-        {status === Status.RESOLVED && <FilmList state={data}></FilmList>}
-        {!data.length && status === Status.RESOLVED && (
-          <h2>There are no movies that matched your query.</h2>
-        )}
-      </section>
+      {status === Status.REJECTED ? (
+        <h2>
+          An error occurred, we could not upload the data, please try reloading
+          the page and try again :)
+        </h2>
+      ) : (
+        <>
+          <section>
+            <SearchForm onSubmit={handleSubmit}></SearchForm>
+          </section>
+          <section>
+            {loading && <Loader />}
+            {status === Status.RESOLVED && <FilmList state={data}></FilmList>}
+            {!data.length && status === Status.RESOLVED && (
+              <h2>There are no movies that matched your query.</h2>
+            )}
+          </section>
+        </>
+      )}
     </>
   );
 };

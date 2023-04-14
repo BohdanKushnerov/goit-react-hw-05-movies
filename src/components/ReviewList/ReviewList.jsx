@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import { CommentList, ReviewItem, ReviewLink } from './ReviewList.styled';
 
 const ReviewList = ({ state }) => {
-  console.log(state);
-
   return (
     <CommentList>
       {state.map(({ author, content, id, url }) => {

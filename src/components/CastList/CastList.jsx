@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { CreditsList, CreditsItem, Name } from './CastList.styled';
 
 const CastList = ({ state }) => {
-  console.log(state);
   return (
     <CreditsList>
       {state.map(({ profile_path, name, id }) => {
