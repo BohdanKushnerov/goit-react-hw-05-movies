@@ -32,8 +32,12 @@ const Home = () => {
 
   return (
     <Section>
-      <h2>Tranding today</h2>
-      {state.length !== 0 && <FilmList state={state}></FilmList>}
+      {state.length !== 0 && (
+        <>
+          <h2>Tranding today</h2>
+          <FilmList state={state}></FilmList>
+        </>
+      )}
       {status === Status.REJECTED && (
         <h2>
           An error occurred, we could not upload the data, please try reloading
