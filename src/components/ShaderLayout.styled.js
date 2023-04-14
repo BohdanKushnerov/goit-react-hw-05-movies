@@ -15,12 +15,13 @@ export const ActiveNavLink = styled(NavLink)`
   color: black;
 
   &.active {
-    padding: 4px;
+    padding: 3px;
     color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 2px 1px rgba(0, 0, 0, 0.14),
       0 2px 2px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    background-color: #3d3e7a;
+    /* background-color: rgba(0, 0, 0, 0.05); */
   }
 
   :hover {
