@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
+import { CommentList, ReviewItem, ReviewLink } from './ReviewList.styled';
 
 const ReviewList = ({ state }) => {
   console.log(state);
 
   return (
-    <ul>
+    <CommentList>
       {state.map(({ author, content, id, url }) => {
         return (
-          <li key={id}>
+          <ReviewItem key={id}>
             <h2>Author: {author}</h2>
             <p>{content}</p>
-            <a href={url}>Link</a>
-          </li>
+            <ReviewLink href={url}>Link</ReviewLink>
+          </ReviewItem>
         );
       })}
-    </ul>
+    </CommentList>
   );
 };
 

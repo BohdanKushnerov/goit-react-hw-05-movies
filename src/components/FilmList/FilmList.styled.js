@@ -9,12 +9,18 @@ export const TrandingList = styled.ul`
 
 export const Item = styled.li`
   position: relative;
+
   max-width: 220px;
+
   text-align: center;
 `;
 
 export const Title = styled.h2`
   color: black;
+`;
+
+export const Img = styled.img`
+  margin-bottom: 20px;
 `;
 
 export const WrapProgressbar = styled.div`

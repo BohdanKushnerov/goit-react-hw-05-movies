@@ -1,4 +1,4 @@
-import { CreditsList } from './CastList.styled';
+import { CreditsList, CreditsItem, Name } from './CastList.styled';
 import PropTypes from 'prop-types';
 
 const CastList = ({ state }) => {
@@ -7,10 +7,10 @@ const CastList = ({ state }) => {
     <CreditsList>
       {state.map(({ profile_path, name, id }) => {
         return (
-          <li key={id}>
+          <CreditsItem key={id}>
             <img src={profile_path} alt={name} />
-            <p>{name}</p>
-          </li>
+            <Name>{name}</Name>
+          </CreditsItem>
         );
       })}
     </CreditsList>

@@ -1,7 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Progressbar from 'components/Progressbar/Progressbar';
-import { TrandingList, Item, Title, WrapProgressbar } from './FilmList.styled';
+import {
+  TrandingList,
+  Item,
+  Title,
+  Img,
+  WrapProgressbar,
+} from './FilmList.styled';
 
 const FilmList = ({ state }) => {
   console.log(state);
@@ -20,7 +26,7 @@ const FilmList = ({ state }) => {
             return (
               <Item key={id}>
                 <Link key={id} to={takePathto(id)} state={{ from: location }}>
-                  <img src={poster_path} alt={title} />
+                  <Img src={poster_path} alt={title} />
                   <Title>{original_title}</Title>
                 </Link>
                 <WrapProgressbar>

@@ -1,9 +1,16 @@
 import { useRef, useEffect, useState } from 'react';
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { fetchMovie } from 'services/Fetch';
 import Movie from 'components/Movie/Movie';
 import { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
+import {
+  ReactLink,
+  Item,
+  WrapMovieDetails,
+  LinkWrap,
+  ReactLinkList,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [state, setState] = useState({});
@@ -31,22 +38,25 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <Link to={current}>Back to products</Link>
+    <WrapMovieDetails>
+      <LinkWrap>
+        <ReactLink to={current}>{'\u2190'} Back to products</ReactLink>
+      </LinkWrap>
       {Object.keys(state).length !== 0 ? <Movie state={state}></Movie> : null}
 
-      <ul>
-        <li>
-          <Link to="cast">CAST</Link>
-        </li>
-        <li>
-          <Link to="reviews">REVIEWS</Link>
-        </li>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </ul>
-    </div>
+      <ReactLinkList>
+        <Item>
+          <ReactLink to="cast">CAST</ReactLink>
+        </Item>
+        <Item>
+          <ReactLink to="reviews">REVIEWS</ReactLink>
+        </Item>
+      </ReactLinkList>
+
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+    </WrapMovieDetails>
   );
 };
 

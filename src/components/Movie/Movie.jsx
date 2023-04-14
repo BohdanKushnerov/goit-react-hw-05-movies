@@ -1,11 +1,8 @@
-import { MovieWrap } from './Movie.styled';
 import PropTypes from 'prop-types';
+import { MovieWrap, InfoWrap, WrapBar, Title, SubTitle } from './Movie.styled';
+import Progressbar from 'components/Progressbar/Progressbar';
 
 const Movie = ({ state }) => {
-  // if (!state) {
-  //   return <div>Loading...</div>;
-  // }
-
   console.log(state);
   const { vote_average, overview, title, genres, poster_path } = state;
 
@@ -13,14 +10,27 @@ const Movie = ({ state }) => {
     <MovieWrap>
       <img src={poster_path} alt={title} />
 
-      <div>
-        <h2>{title}</h2>
-        <p>User score: {Math.round(vote_average * 10)}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <p>{genres}</p>
-      </div>
+      <InfoWrap>
+        <div>
+          <Title>{title}</Title>
+          {/* <p>User score: {Math.round(vote_average * 10)}%</p> */}
+          <WrapBar>
+            User score:
+            <Progressbar
+              value={Math.round(vote_average * 10)}
+              text={`${Math.round(vote_average * 10)}%`}
+            />
+          </WrapBar>
+        </div>
+        <div>
+          <SubTitle>Overview</SubTitle>
+          <p>{overview}</p>
+        </div>
+        <div>
+          <SubTitle>Genres</SubTitle>
+          <p>{genres}</p>
+        </div>
+      </InfoWrap>
     </MovieWrap>
   );
 };

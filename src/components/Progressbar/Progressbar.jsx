@@ -9,7 +9,7 @@ const Progressbar = ({ value, text }) => {
       : value <= 25
       ? value === 0
         ? 'gray'
-        : '#db2360'
+        : '#6323db'
       : '#d2d531';
 
   const trailColor =
