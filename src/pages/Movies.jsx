@@ -14,7 +14,6 @@ const Status = {
 const Movies = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(Status.IDLE);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -34,7 +33,6 @@ const Movies = () => {
 
     // IIFE
     (async function fetch() {
-      setLoading(true);
       setStatus(Status.PENDING);
 
       try {
@@ -44,7 +42,6 @@ const Movies = () => {
         );
 
         setData([...searchFilms]);
-        setLoading(false);
         setStatus(Status.RESOLVED);
       } catch (error) {
         console.log(error);
@@ -65,9 +62,7 @@ const Movies = () => {
         <SearchForm onSubmit={handleSubmit}></SearchForm>
       </section>
       <section>
-        {status === Status.RESOLVED && (
-          <FilmList state={data} loading={loading}></FilmList>
-        )}
+        {status === Status.RESOLVED && <FilmList state={data}></FilmList>}
         {!data.length && status === Status.RESOLVED && (
           <h2>There are no movies that matched your query.</h2>
         )}

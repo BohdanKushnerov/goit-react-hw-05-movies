@@ -1,15 +1,6 @@
-import styled from '@emotion/styled';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import PropTypes from 'prop-types';
-
-const Canvas = styled(CircularProgressbar)`
-  position: absolute;
-  top: 303px;
-  left: 5px;
-
-  width: 47px;
-`;
 
 const Progressbar = ({ value, text }) => {
   const pathColor =
@@ -31,7 +22,7 @@ const Progressbar = ({ value, text }) => {
       : '#423d0f';
 
   return (
-    <Canvas
+    <CircularProgressbar
       value={value}
       text={text}
       background
@@ -43,7 +34,7 @@ const Progressbar = ({ value, text }) => {
         backgroundColor: '#081c22',
         textSize: '35px',
       })}
-    ></Canvas>
+    ></CircularProgressbar>
   );
 };
 

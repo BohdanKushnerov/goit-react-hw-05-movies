@@ -1,10 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
-import Loader from 'components/Loader/Loader';
-import { TrandingList, Item, Title } from './FilmList.styled';
-import Progressbar from 'components/Progressbar/Progressbar';
 import PropTypes from 'prop-types';
+import Progressbar from 'components/Progressbar/Progressbar';
+import { TrandingList, Item, Title, WrapProgressbar } from './FilmList.styled';
 
-const FilmList = ({ state, loading }) => {
+const FilmList = ({ state }) => {
   console.log(state);
 
   const location = useLocation();
@@ -15,7 +14,6 @@ const FilmList = ({ state, loading }) => {
 
   return (
     <>
-      {loading && <Loader />}
       <TrandingList>
         {state.map(
           ({ id, original_title, vote_average, poster_path, title }) => {
@@ -25,10 +23,12 @@ const FilmList = ({ state, loading }) => {
                   <img src={poster_path} alt={title} />
                   <Title>{original_title}</Title>
                 </Link>
-                <Progressbar
-                  value={Math.round(vote_average * 10)}
-                  text={`${Math.round(vote_average * 10)}%`}
-                />
+                <WrapProgressbar>
+                  <Progressbar
+                    value={Math.round(vote_average * 10)}
+                    text={`${Math.round(vote_average * 10)}%`}
+                  />
+                </WrapProgressbar>
               </Item>
             );
           }
@@ -48,7 +48,6 @@ FilmList.propTypes = {
       vote_average: PropTypes.number.isRequired,
     }).isRequired
   ).isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default FilmList;

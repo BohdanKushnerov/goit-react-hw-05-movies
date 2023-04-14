@@ -5,6 +5,8 @@ import {
   NavList,
   Header,
 } from './ShaderLayout.styled';
+import { Suspense } from 'react';
+import Loader from './Loader/Loader';
 
 const SharedLayout = () => {
   return (
@@ -23,7 +25,9 @@ const SharedLayout = () => {
       </Header>
       <main>
         <Container>
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </Container>
       </main>
     </>
