@@ -4,20 +4,16 @@ import FilmList from 'components/FilmList/FilmList';
 
 const Home = () => {
   const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
 
     // IIFE
     (async function fetchFilms() {
-      setLoading(true);
-
       try {
         const trandFilms = await fetchTrending(abortController);
 
         setState([...trandFilms]);
-        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +27,7 @@ const Home = () => {
   return (
     <section>
       <h2>Tranding today</h2>
-      <FilmList state={state} loading={loading}></FilmList>
+      <FilmList state={state}></FilmList>
     </section>
   );
 };

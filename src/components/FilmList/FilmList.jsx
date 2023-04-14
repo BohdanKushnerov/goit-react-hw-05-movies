@@ -19,28 +19,24 @@ const FilmList = ({ state }) => {
   }
 
   return (
-    <>
-      <TrandingList>
-        {state.map(
-          ({ id, original_title, vote_average, poster_path, title }) => {
-            return (
-              <Item key={id}>
-                <Link key={id} to={takePathto(id)} state={{ from: location }}>
-                  <Img src={poster_path} alt={title} />
-                  <Title>{original_title}</Title>
-                </Link>
-                <WrapProgressbar>
-                  <Progressbar
-                    value={Math.round(vote_average * 10)}
-                    text={`${Math.round(vote_average * 10)}%`}
-                  />
-                </WrapProgressbar>
-              </Item>
-            );
-          }
-        )}
-      </TrandingList>
-    </>
+    <TrandingList>
+      {state.map(({ id, original_title, vote_average, poster_path, title }) => {
+        return (
+          <Item key={id}>
+            <Link key={id} to={takePathto(id)} state={{ from: location }}>
+              <Img src={poster_path} alt={title} />
+              <Title>{original_title}</Title>
+            </Link>
+            <WrapProgressbar>
+              <Progressbar
+                value={Math.round(vote_average * 10)}
+                text={`${Math.round(vote_average * 10)}%`}
+              />
+            </WrapProgressbar>
+          </Item>
+        );
+      })}
+    </TrandingList>
   );
 };
 

@@ -4,9 +4,11 @@ import { fetchSearchMovie } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
 import Status from 'services/Constants';
+import Loader from 'components/Loader/Loader';
 
 const Movies = () => {
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,6 +29,7 @@ const Movies = () => {
 
     // IIFE
     (async function fetch() {
+      setLoading(true);
       setStatus(Status.PENDING);
 
       try {
@@ -37,6 +40,7 @@ const Movies = () => {
 
         setData([...searchFilms]);
         setStatus(Status.RESOLVED);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         setStatus(Status.REJECTED);
@@ -56,6 +60,7 @@ const Movies = () => {
         <SearchForm onSubmit={handleSubmit}></SearchForm>
       </section>
       <section>
+        {loading && <Loader />}
         {status === Status.RESOLVED && <FilmList state={data}></FilmList>}
         {!data.length && status === Status.RESOLVED && (
           <h2>There are no movies that matched your query.</h2>
