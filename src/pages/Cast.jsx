@@ -21,8 +21,8 @@ const Cast = () => {
         setState([...moviesCredits]);
         setStatus(Status.RESOLVED);
       } catch (error) {
-        console.log(error);
         setStatus(Status.REJECTED);
+        console.log(error);
       }
     })();
 
@@ -36,6 +36,12 @@ const Cast = () => {
       {status === Status.RESOLVED && <CastList state={state}></CastList>}
       {!state.length && status === Status.RESOLVED && (
         <h2>We don't have any cast added to this movie</h2>
+      )}
+      {status === Status.REJECTED && (
+        <h2>
+          An error occurred, we could not upload the data, please try reloading
+          the page and try again :)
+        </h2>
       )}
     </section>
   );

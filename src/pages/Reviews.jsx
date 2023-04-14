@@ -37,6 +37,12 @@ const Reviews = () => {
       {!state.length && status === Status.RESOLVED && (
         <h2>We don't have any reviews for this film</h2>
       )}
+      {status === Status.REJECTED && (
+        <h2>
+          An error occurred, we could not upload the data, please try reloading
+          the page and try again :)
+        </h2>
+      )}
     </section>
   );
 };

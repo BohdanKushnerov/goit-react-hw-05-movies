@@ -3,7 +3,6 @@ import Progressbar from 'components/Progressbar/Progressbar';
 import { MovieWrap, InfoWrap, WrapBar, Title, SubTitle } from './Movie.styled';
 
 const Movie = ({ state }) => {
-  console.log(state);
   const { vote_average, overview, title, genres, poster_path } = state;
 
   return (
