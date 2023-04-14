@@ -3,13 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovie } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
-
-const Status = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
+import Status from 'services/Constants';
 
 const Movies = () => {
   const [search, setSearch] = useState('');

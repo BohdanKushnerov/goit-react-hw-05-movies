@@ -2,13 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'services/Fetch';
 import CastList from 'components/CastList/CastList';
-
-const Status = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
+import Status from 'services/Constants';
 
 const Cast = () => {
   const [state, setState] = useState([]);

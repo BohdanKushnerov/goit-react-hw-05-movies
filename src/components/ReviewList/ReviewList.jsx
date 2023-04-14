@@ -11,7 +11,9 @@ const ReviewList = ({ state }) => {
           <ReviewItem key={id}>
             <h2>Author: {author}</h2>
             <p>{content}</p>
-            <ReviewLink href={url}>Link</ReviewLink>
+            <ReviewLink href={url} target="_blank">
+              Link
+            </ReviewLink>
           </ReviewItem>
         );
       })}
