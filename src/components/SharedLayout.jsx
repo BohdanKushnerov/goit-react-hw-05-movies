@@ -1,12 +1,12 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import Loader from './Loader/Loader';
 import {
   Container,
   ActiveNavLink,
   NavList,
   Header,
 } from './ShaderLayout.styled';
-import { Suspense } from 'react';
-import Loader from './Loader/Loader';
 
 const SharedLayout = () => {
   return (

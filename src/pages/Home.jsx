@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchTrending } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
+import { Section } from './Home.styled';
 
 const Home = () => {
   const [state, setState] = useState([]);
@@ -25,10 +26,10 @@ const Home = () => {
   }, []);
 
   return (
-    <section>
+    <Section>
       <h2>Tranding today</h2>
-      <FilmList state={state}></FilmList>
-    </section>
+      {state.length !== 0 && <FilmList state={state}></FilmList>}
+    </Section>
   );
 };
 

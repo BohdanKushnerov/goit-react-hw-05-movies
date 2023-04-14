@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovie } from 'services/Fetch';
 import FilmList from 'components/FilmList/FilmList';
 import SearchForm from 'components/SearchForm/SearchForm';
-import Status from 'services/Constants';
 import Loader from 'components/Loader/Loader';
+import Status from 'services/Constants';
 
 const Movies = () => {
   const [search, setSearch] = useState('');
@@ -51,8 +51,6 @@ const Movies = () => {
       abortController.abort();
     };
   }, [search, filmName]);
-
-  console.log('data', data);
 
   return (
     <>

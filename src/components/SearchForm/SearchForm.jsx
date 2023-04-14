@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Form, Input, Button } from './SearchForm.styled';
 
 const SearchForm = ({ onSubmit }) => {
   const [state, setState] = useState('');
@@ -18,10 +19,18 @@ const SearchForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="text" value={state} onChange={handleChange} />
-      <button type="submit">Search</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        name="text"
+        value={state}
+        onChange={handleChange}
+        placeholder="Search for a movie..."
+      />
+      <Button type="submit" disabled={!state}>
+        Search
+      </Button>
+    </Form>
   );
 };
 

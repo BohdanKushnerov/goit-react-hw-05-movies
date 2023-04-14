@@ -1,8 +1,7 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, Suspense } from 'react';
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { fetchMovie } from 'services/Fetch';
 import Movie from 'components/Movie/Movie';
-import { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
 import {
   ReactLink,

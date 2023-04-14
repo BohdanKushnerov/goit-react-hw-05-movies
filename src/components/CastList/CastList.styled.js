@@ -8,8 +8,9 @@ export const CreditsList = styled.ul`
 `;
 
 export const CreditsItem = styled.li`
-  background-color: #e5e8e9;
   max-width: 138px;
+
+  background-color: #e5e8e9;
   text-align: center;
   border-radius: 5px;
   overflow: hidden;

@@ -1,5 +1,5 @@
-import { CreditsList, CreditsItem, Name } from './CastList.styled';
 import PropTypes from 'prop-types';
+import { CreditsList, CreditsItem, Name } from './CastList.styled';
 
 const CastList = ({ state }) => {
   console.log(state);

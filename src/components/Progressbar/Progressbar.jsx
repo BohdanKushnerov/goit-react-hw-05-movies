@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import PropTypes from 'prop-types';
 
 const Progressbar = ({ value, text }) => {
   const pathColor =

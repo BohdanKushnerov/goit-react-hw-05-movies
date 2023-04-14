@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { MovieWrap, InfoWrap, WrapBar, Title, SubTitle } from './Movie.styled';
 import Progressbar from 'components/Progressbar/Progressbar';
+import { MovieWrap, InfoWrap, WrapBar, Title, SubTitle } from './Movie.styled';
 
 const Movie = ({ state }) => {
   console.log(state);
@@ -13,7 +13,6 @@ const Movie = ({ state }) => {
       <InfoWrap>
         <div>
           <Title>{title}</Title>
-          {/* <p>User score: {Math.round(vote_average * 10)}%</p> */}
           <WrapBar>
             User score:
             <Progressbar

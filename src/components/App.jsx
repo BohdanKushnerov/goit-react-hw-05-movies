@@ -23,12 +23,3 @@ export const App = () => {
     </Routes>
   );
 };
-
-// 2. add default values for useSearchParams - update when delete values
-
-// 1. Try find new canvas
-// 2. Sceleton
-// https://skeletonreact.com/
-// https://github.com/danilowoz/react-content-loader#gettingstarted
-
-// 3. finnaly

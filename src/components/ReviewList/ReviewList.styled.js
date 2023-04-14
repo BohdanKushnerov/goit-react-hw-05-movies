@@ -21,8 +21,13 @@ export const ReviewLink = styled.a`
   display: block;
   width: 50px;
   font-weight: 500;
-  color: orangered;
+  color: gray;
   border-radius: 5px;
-  outline: 1px solid orangered;
+  outline: 1px solid gray;
   text-align: center;
+
+  :hover {
+    color: orangered;
+    outline: 1px solid orangered;
+  }
 `;
