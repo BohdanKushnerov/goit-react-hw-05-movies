@@ -22,7 +22,7 @@ const FilmList = ({ state }) => {
         return (
           <Item key={id}>
             <Link key={id} to={takePathto(id)} state={{ from: location }}>
-              <Img src={poster_path} alt={title} />
+              <Img src={poster_path} alt={title} width={220} height={330} />
               <Title>{original_title}</Title>
             </Link>
             <WrapProgressbar>

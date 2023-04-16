@@ -3,23 +3,31 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 const Progressbar = ({ value, text }) => {
-  const pathColor =
-    value >= 75
-      ? '#21d07a'
-      : value <= 25
-      ? value === 0
-        ? 'gray'
-        : '#6323db'
-      : '#d2d531';
+  const pathColor = (() => {
+    switch (true) {
+      case value >= 75:
+        return '#21d07a';
+      case value <= 75 && value >= 25:
+        return '#d2d531';
+      case value <= 25 && value !== 0:
+        return '#db2360';
+      default:
+        return 'gray';
+    }
+  })();
 
-  const trailColor =
-    value >= 75
-      ? '#204529'
-      : value <= 25
-      ? value === 0
-        ? 'gray'
-        : '#571435'
-      : '#423d0f';
+  const trailColor = (() => {
+    switch (true) {
+      case value >= 75:
+        return '#204529';
+      case value <= 75 && value >= 25:
+        return '#423d0f';
+      case value <= 25 && value !== 0:
+        return '#571435';
+      default:
+        return 'gray';
+    }
+  })();
 
   return (
     <CircularProgressbar
