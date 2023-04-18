@@ -7,7 +7,6 @@ import Loader from 'components/Loader/Loader';
 import Status from 'services/Constants';
 
 const Movies = () => {
-  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
@@ -17,11 +16,10 @@ const Movies = () => {
 
   const handleSubmit = value => {
     setSearchParams({ search: value });
-    setSearch(value);
   };
 
   useEffect(() => {
-    if (!search && !filmName) {
+    if (!filmName) {
       return;
     }
 
@@ -33,10 +31,7 @@ const Movies = () => {
       setStatus(Status.PENDING);
 
       try {
-        const searchFilms = await fetchSearchMovie(
-          search || filmName,
-          abortController
-        );
+        const searchFilms = await fetchSearchMovie(filmName, abortController);
 
         setData([...searchFilms]);
         setStatus(Status.RESOLVED);
@@ -50,7 +45,7 @@ const Movies = () => {
     return () => {
       abortController.abort();
     };
-  }, [search, filmName]);
+  }, [filmName]);
 
   return (
     <>
